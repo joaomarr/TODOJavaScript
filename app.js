@@ -70,20 +70,33 @@ const refreshItem = (index) => {
 
 const clickItem = (event) => {
     const element = event.target;
+    const index = element.dataset.index;
     if (element.id === 'exclude') {
-        const index = element.dataset.index;
         clearItem (index);
-    }else if (element.type === 'checkbox') {
-        const index = element.dataset.index;
-        refreshItem (index);
     }else if (element.id === 'finish') {
-        const index = element.dataset.index;
         finishItem (index);
-    }else {
-
+    }else if (element.type === 'checkbox'){
+        refreshItem (index);
     }
 } 
 
 document.getElementById('todoList').addEventListener('click', clickItem);
+
+const checking = (item) => {
+    if (item.status === '') {
+        item.status = 'checked';
+    } else if (item.status === 'checked') {
+        item.status = item.status;
+    }
+}
+
+const allSelected = () => {
+    const data = getData();
+    data.forEach( item => checking(item))
+    setData(data);
+    render();
+}
+
+document.getElementById('selectAll').addEventListener('click', allSelected)
 
 render();
