@@ -1,0 +1,32 @@
+body {
+  color: #333333;
+  font-family: ucida    Sans    Unicode", "Lucida   Grande", sans-serif;
+  padding-top: 20px;
+  background: linear-gradient(#fd1e44, #ff4554c4);
+}
+
+.container  {
+  margin: 0   auto;
+  width: 940px;
+}
+
+form {
+  padding: 20px 0px 50px 0px;
+}
+
+#content {
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  background: white;
+}
+
+span {
+  cursor: pointer;
+  color: #000000;
+}
+
+span:hover {
+  transform: scale(1.5);
+  text-decoration: underline;
+  color: #fd1e44;
+}

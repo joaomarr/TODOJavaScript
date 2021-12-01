@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pr-br">
+
+<head>
+    <title>Teste de Desenvolvimento - Front-End</title>
+    <meta charset="utf-8">
+    <meta name="Dev" content="Daniel Filho">
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+
+    <div id="content" class="jumbotron text-center container">
+        <h1>CI&T</h1>
+        <hr>
+        <p>My TODO List</p>
+
+        <form class="form-inline">
+            <div class="input-group">
+                <input id="register" type="text" class="form-control" size="50" placeholder="Descrição: ">
+                <div class="input-group-btn" id="button"> 
+                    <button type="button" class="btn btn-danger" >Cadastrar</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-hover table-bordered">
+            <thead class="justify-content-center">
+                <tr>
+                    <th scope="col" background: #5f9ea0; background: linear-gradient(#5f9ea0, #e0eeee); color: #134f5c;>
+                        <strong>#</strong>
+                    </th>
+                    <th scope="col" background: #5f9ea0; background: linear-gradient(#5f9ea0, #e0eeee); color: #134f5c;>
+                        <Strong>Tarefas</Strong>
+                    </th>
+                    <th scope="col" background: #5f9ea0; background: linear-gradient(#5f9ea0, #e0eeee); color: #134f5c;>
+                        <strong>Ações</strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="todoList">
+            </tbody>
+        </table>
+
+        <a href="#">
+            <input type="button" value="Selecionar Todos" id="sel-t">
+        </a>
+        <a href="#">
+            <input type="button" value="Finalizar Selecionados" id="fim-s">
+        </a>
+
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
