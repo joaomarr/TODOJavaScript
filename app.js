@@ -8,7 +8,7 @@ const createItem = (task, check, index) => {
     item.innerHTML = ` 
         <th scope="row"><input type="checkbox" ${check} data-index=${index}></th>
         <td id="${index}">${task}</td>
-        <td><span id="edit" data-index=${index}>Editar</span> - <span id="exclude" data-index=${index}>Excluir</span> - <span id="finish" data-index=${index}>Finalizar</span></td>
+        <td><span id="edit" data-index=${index}>Editar</span> - <span id="exclude" data-index=${index}>Excluir</span> - <span class="finished" data-index=${index}>Finalizar</span></td>
     `;
     document.getElementById('todoList').appendChild(item);
 }
@@ -26,6 +26,7 @@ const render = () => {
     data.forEach ( (item, index) => createItem (item.activities, item.status, index));
 }
 
+
 const enterInsert = (event) => {
     const keys = event.key;
     const text = event.target.value;
@@ -37,17 +38,19 @@ const enterInsert = (event) => {
         event.target.value = '';
     } 
 }
-//  --PROBLEMA NO CÓDIGO (RESOLVER)--
-// const registerInsert = (event) => {
-//     console.log(event);
-//     data.push ({'activities': text, 'status': ''});
-//     render()
-//     event.target.value = '';
-// }
-//  --PROBLEMA NO CÓDIGO (RESOLVER)--
+
+const registerInsert = () => {
+    const element = document.getElementById("register");
+    const input = element.value;
+    const data = getData();
+    data.push ({'activities': input, 'status': ''});
+    setData(data);
+    render();
+    element.value = '';
+}
 
 document.getElementById('register').addEventListener('keypress', enterInsert);
-// document.getElementById('button').addEventListener('click', registerInsert);
+document.getElementById('button').addEventListener('click', registerInsert);
 
 const clearItem = (index) => {
     const data = getData();
@@ -72,7 +75,7 @@ const clickItem = (event) => {
     const element = event.target;
     const index = element.dataset.index;
     if (element.id === 'exclude') {
-        clearItem (index);
+        clearItem(index);
     }else if (element.id === 'finish') {
         finishItem (index);
     }else if (element.type === 'checkbox'){
@@ -82,7 +85,7 @@ const clickItem = (event) => {
 
 document.getElementById('todoList').addEventListener('click', clickItem);
 
-const checking = (item) => {
+const selectChecking = (item) => {
     if (item.status === '') {
         item.status = 'checked';
     } else if (item.status === 'checked') {
@@ -92,11 +95,29 @@ const checking = (item) => {
 
 const allSelected = () => {
     const data = getData();
-    data.forEach( item => checking(item))
+    data.forEach( item => selectChecking(item));
     setData(data);
     render();
 }
 
-document.getElementById('selectAll').addEventListener('click', allSelected)
+const clearCheck = () => {
+    const data = getData();
+    for (var i = 0; i < data.length; i++) {
+        const status = data[i].status;
+        if (status === 'checked') {
+            data.splice (i, 1);
+            setData(data);
+        }
+    }
+}
 
+const allRemoved = () => {
+    const data = getData();
+    data.forEach( data => clearCheck(data.status));
+    render();
+}
+
+document.getElementById('selectAll').addEventListener('click', allSelected)
+// document.querySelectorAll('#finishSelected', '.finished').addEventListener('click', allFinished)
+document.getElementById('removeSelected').addEventListener('click', allRemoved)
 render();
