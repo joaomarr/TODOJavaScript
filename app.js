@@ -8,7 +8,7 @@ const createItem = (task, check, index) => {
     item.innerHTML = ` 
         <th scope="row"><input type="checkbox" ${check} data-index=${index}></th>
         <td id="${index}">${task}</td>
-        <td><span id="edit" data-index=${index}>Editar</span> - <span id="exclude" data-index=${index}>Excluir</span> - <span class="finished" data-index=${index}>Finalizar</span></td>
+        <td><span id="edit" data-index=${index}>Editar</span> - <span id="exclude" data-index=${index}>Excluir</span> - <span id="finished" data-index=${index}>Finalizar</span></td>
     `;
     document.getElementById('todoList').appendChild(item);
 }
@@ -32,7 +32,7 @@ const enterInsert = (event) => {
     const text = event.target.value;
     if (keys === 'Enter') {
         const data = getData();
-        data.push ({'activities': text, 'status': ''});
+        data.push ({'activities': text, 'status': '', 'done': ''});
         setData(data);
         render();
         event.target.value = '';
@@ -43,7 +43,7 @@ const registerInsert = () => {
     const element = document.getElementById("register");
     const input = element.value;
     const data = getData();
-    data.push ({'activities': input, 'status': ''});
+    data.push ({'activities': input, 'status': '', 'done': ''});
     setData(data);
     render();
     element.value = '';
@@ -60,8 +60,11 @@ const clearItem = (index) => {
 } 
 
 const finishItem = (index) => {
+    const data = getData();
+    data[index].done = data[index].done === '' ? 'finished': '';
     const finished = document.getElementById(index);
-    finished.style.textDecoration = "line-through";
+    finished.classList.toggle('finish');
+    setData(data);
 }
 
 const refreshItem = (index) => {
@@ -76,7 +79,7 @@ const clickItem = (event) => {
     const index = element.dataset.index;
     if (element.id === 'exclude') {
         clearItem(index);
-    }else if (element.id === 'finish') {
+    }else if (element.id === 'finished') {
         finishItem (index);
     }else if (element.type === 'checkbox'){
         refreshItem (index);
@@ -117,7 +120,8 @@ const allRemoved = () => {
     render();
 }
 
-document.getElementById('selectAll').addEventListener('click', allSelected)
-// document.querySelectorAll('#finishSelected', '.finished').addEventListener('click', allFinished)
-document.getElementById('removeSelected').addEventListener('click', allRemoved)
+document.getElementById('selectAll').addEventListener('click', allSelected);
+document.getElementById('finishSelected').addEventListener('click', allFinished);
+document.getElementById('removeSelected').addEventListener('click', allRemoved);
+
 render();

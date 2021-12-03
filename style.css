@@ -30,3 +30,7 @@ span:hover {
   text-decoration: underline;
   color: #fd1e44;
 }
+
+.finish {
+  text-decoration: line-through;
+}
