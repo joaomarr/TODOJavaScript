@@ -2,7 +2,6 @@
 const getData = () => JSON.parse (localStorage.getItem ('todoList')) ?? [];
 const setData = (data) => localStorage.setItem ('todoList', JSON.stringify(data));
 
-// Criação de atividades
 const createItem = (task, check, index) => {
     const item  = document.createElement('tr');
     item.innerHTML = ` 
@@ -114,14 +113,7 @@ const clearCheck = () => {
     }
 }
 
-const allRemoved = () => {
-    const data = getData();
-    data.forEach( data => clearCheck(data.status));
-    render();
-}
-
 document.getElementById('selectAll').addEventListener('click', allSelected);
-document.getElementById('finishSelected').addEventListener('click', allFinished);
 document.getElementById('removeSelected').addEventListener('click', allRemoved);
 
 render();
